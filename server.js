@@ -14,8 +14,9 @@ app.use(express.static('public'));
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (request, response) {
   response.json({
-    ip_adress : request.connection.remoteAddress.toString(),
-     language : 
+    ip_adress : request.headers['x-forwarded-for'].split(",")[0].toString(),
+     language : request.headers["accept-language"].split(",")[0].toString(),
+     software : request.headers["user-agent"]..toString()
   });
 });
 
